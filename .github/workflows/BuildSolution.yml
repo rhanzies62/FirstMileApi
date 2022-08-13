@@ -1,0 +1,45 @@
+name: Build Solution
+
+env:
+  ACTIONS_ALLOW_UNSECURE_COMMANDS: true    # set this to the name of your Azure Web App
+
+on:
+  push:
+    branches:
+      - "master"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: setup-msbuild
+        uses: microsoft/setup-msbuild@v1
+      
+      - name: Setup Nuget.exe for use with actions
+        uses: Nuget/Setup-nuget@v1.0.2
+            
+      - name: Restore Nuget Packages
+        run: nuget restore firstmile.sln
+        
+      - name: Build Solution
+        run: msbuild firstmile.sln /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:DeleteExistingFiles=True /p:platform="Any CPU" /p:configuration="Release" /p:PublishUrl="../_build"
+        
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v1.0.0
+        with:
+          name: FirstMileBundle
+          path: "./_build"
+        
+      - name: 'Deploy to Azure Web App'
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'firstmile-dev-web'
+          publish-profile: ${{ secrets.FIRSTMILE_API_DEV_PUBLISH_PROFILE }}
+          package: ./_build
