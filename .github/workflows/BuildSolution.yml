@@ -1,5 +1,8 @@
 name: Build Solution
 
+env:
+  ACTIONS_ALLOW_UNSECURE_COMMANDS: true    # set this to the name of your Azure Web App
+
 on:
   push:
     branches:
