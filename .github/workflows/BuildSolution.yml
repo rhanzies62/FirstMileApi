@@ -29,4 +29,17 @@ jobs:
         run: nuget restore firstmile.sln
         
       - name: Build Solution
-        run: msbuild firstmile.sln
+        run: msbuild firstmile.sln /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:DeleteExistingFiles=True /p:platform="Any CPU" /p:configuration="Release" /p:PublishUrl="../_build"
+        
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v1.0.0
+        with:
+          name: FirstMileBundle
+          path: "./_build"
+        
+      - name: 'Deploy to Azure Web App'
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'firstmile-dev-web'
+          publish-profile: ${{ secrets.FIRSTMILE_API_DEV_PUBLISH_PROFILE }}
+          package: ./_build
