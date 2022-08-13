@@ -40,6 +40,6 @@ jobs:
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'firstmile-dev-web'
+          app-name: 'firstmile-dev-api'
           publish-profile: ${{ secrets.FIRSTMILE_API_DEV_PUBLISH_PROFILE }}
           package: ./_build
