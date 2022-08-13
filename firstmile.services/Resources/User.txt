@@ -1,0 +1,19 @@
+select count(userid) as TotalCount from FmUser
+
+select * from
+(select 
+u.UserId,
+u.FirstName,
+u.LastName,
+u.Username,
+u.Email,
+u.ContactNumber,
+ust.Description as 'UserType',
+u.PostalCode + ' ' + u.City + ', ' + p.Description + ' ' + cnt.Description as FullAddress
+from FmUser as u
+join FmLookUpType as ust on u.Type = ust.LookUpValue and ust.EntityCode = 'UST'
+left join FmLookUpType  as cnt on u.Type = cnt.LookUpValue and cnt.EntityCode = 'CNT'
+left join Fmprovince p on u.ProvinceId = p.ProvinceId) as q
+##WHERE##
+ORDER BY ##ORDERBY##
+OFFSET ##SKIP## ROWS FETCH NEXT ##TAKE## ROWS only

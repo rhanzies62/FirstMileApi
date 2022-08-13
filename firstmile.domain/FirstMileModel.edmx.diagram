@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e8b511c506594cf1885b14349e51c2aa" Name="Diagram1" ZoomLevel="106">
+        <EntityTypeShape EntityType="Model.FmEquipment" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.FmUser" Width="1.5" PointX="2.375" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.FmLookUpType" Width="1.5" PointX="0.5" PointY="4.375" />
+        <EntityTypeShape EntityType="Model.FmProvince" Width="1.5" PointX="4" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.FmBookEquipment" Width="1.5" PointX="7.75" PointY="3.75" />
+        <EntityTypeShape EntityType="Model.FmBooking" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="Model.FmCustomer" Width="1.5" PointX="2.75" PointY="6.75" />
+        <EntityTypeShape EntityType="Model.FmCustomerUser" Width="1.5" PointX="5.625" PointY="0.75" />
+        <AssociationConnector Association="Model.FK_FmBookingEquipment_SaleId" />
+        <AssociationConnector Association="Model.FK_FmBooking_FmCustomer" />
+        <AssociationConnector Association="Model.FK_FmCustomerUser_FmCustomer" />
+        <AssociationConnector Association="Model.FK_FmCustomerUser_FmUser" />
+        <AssociationConnector Association="Model.FK_FmUser_FmProvince" />
+        <AssociationConnector Association="Model.FK_FmCustomer_FmProvince" />
+        <EntityTypeShape EntityType="Model.ApiLog" Width="1.5" PointX="5.375" PointY="7.75" />
+        <EntityTypeShape EntityType="Model.FmUsage" Width="1.5" PointX="7.375" PointY="7.75" />
+        <EntityTypeShape EntityType="Model.Meili" Width="1.5" PointX="9.375" PointY="7.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

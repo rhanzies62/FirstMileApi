@@ -1,0 +1,11 @@
+select b.Salesid,concat(b.ProjectName,' - ',c.Name) as Title,
+(select top 1 BorrowedDateFrom from fmbookequipment
+where saleid =  b.SalesId
+order by BorrowedDateFrom) as StartDate,
+(select top 1 BorrowedDateTo from fmbookequipment
+where saleid = b.SalesId
+order by BorrowedDateTo desc) as EndDate,
+case when color is null then concat('#',CONVERT(VARCHAR(max), CRYPT_GEN_RANDOM(3), 2)) else color end as color
+from FmBooking b
+join FmCustomer c on b.CustomerId = c.CustomerId
+##CustomerId##

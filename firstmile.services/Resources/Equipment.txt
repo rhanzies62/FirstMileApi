@@ -1,0 +1,25 @@
+SELECT   Count(equipmentid) as TotalCount
+FROM     FmEquipment
+##WHERE##
+
+SELECT * FROM
+(SELECT   eq.EquipmentId, 
+         eq.Company, 
+         eq.Description, 
+         eq.Name,
+         eq.Serial,
+         eq.CreatedDate, 
+         u.Username, 
+         eqt.description AS Type,
+         eq.Type as TypeId,
+         eq.GatewayId,
+         eq.IsActive,
+         eq.UpdatedDate,
+         up.Username as UpdatedByUsername
+FROM     fmequipment eq 
+	JOIN fmlookuptype eqt ON eq.type = eqt.lookupvalue AND eqt.entitycode = 'EQT' 
+	JOIN fmuser u ON eq.createdby = u.userid
+    LEFT JOIN fmuser up ON eq.updatedby = up.userid) as q
+##WHERE##
+ORDER BY ##ORDERBY##
+OFFSET ##SKIP## ROWS FETCH NEXT ##TAKE## ROWS only

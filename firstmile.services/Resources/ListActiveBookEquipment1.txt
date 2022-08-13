@@ -1,0 +1,22 @@
+select 
+act.Description as ServiceType,
+be.ServiceTypeId,
+b.SalesId,
+cu.UserId,
+EQT.Description as Type,
+e.Type as TypeId,
+e.Name,
+e.Serial,
+e.GatewayId,
+e.EquipmentId,
+b.ProjectName,
+min(FORMAT(be.BorrowedDateFrom, 'd', 'en-US' )) as BorrowedDateFromST,
+max(FORMAT(be.BorrowedDateTo, 'd', 'en-US' )) as BorrowedDateToST from FmBookEquipment be
+join FmBooking b on be.SaleId = b.SalesId
+join FmCustomerUser cu on b.CustomerId = cu.CustomerId
+left join FmEquipment e on be.EquipmentId = e.EquipmentId
+join FmLookUpType ACT on be.ServiceTypeId = ACT.LookUpValue and act.EntityCode = 'ACT'
+left join FmLookUpType EQT on e.Type = EQT.LookUpValue and EQT.EntityCode = 'EQT'
+where cu.UserId = ##UserID##
+group by be.ServiceTypeId,e.Name,e.Serial,e.GatewayId,cu.UserId,b.SalesId,act.Description,EQT.Description,e.Type,e.EquipmentId,b.ProjectName
+order by b.SalesId

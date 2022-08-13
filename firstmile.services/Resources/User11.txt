@@ -1,0 +1,14 @@
+select * from(
+select m.*,eq.Name from Meili m
+join FmEquipment eq on m.EquipmentId = eq.EquipmentId
+) as q
+##WHERE##
+ORDER BY ##ORDERBY##
+OFFSET ##SKIP## ROWS FETCH NEXT ##TAKE## ROWS only
+
+select count(q.MeiliId) as TotalCount from (
+select m.*,eq.Name from Meili m
+join FmEquipment eq on m.EquipmentId = eq.EquipmentId
+) as q
+##WHERE##
+

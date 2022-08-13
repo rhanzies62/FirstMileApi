@@ -1,0 +1,28 @@
+SELECT   Count(SalesId) as TotalCount
+FROM     (select SalesId,ProjectName,c.Name as CustomerName from FmBooking b JOIN FmCustomer c on b.CustomerId = c.CustomerId) as q
+##WHERE##
+
+select * from (SELECT   b.SalesId, 
+         b.CustomerId, 
+		 b.CreatedBy,
+		 c.Name as CustomerName,
+		 count(be.SaleEquipmentId) as EquipmentCount,
+         u.username as CreatedByUserName, 
+		 b.CreatedDate,
+         max(FORMAT(b.CreatedDate, 'd', 'en-US' )) as CreatedDateString,
+		 sts.Description as Status,
+		 b.StatusId,
+		 b.ProjectName,
+		 b.Comment,
+		 b.ShippingInfo,
+		 b.DropOffDate,
+		 b.Discount
+FROM     FmBooking b
+JOIN fmuser u on b.CreatedBy = u.UserId
+JOIN FmCustomer c on b.CustomerId = c.CustomerId
+JOIN FmBookEquipment be on b.SalesId = be.SaleId
+JOIN FmLookUpType sts on b.StatusId = sts.LookUpValue and sts.EntityCode = 'STS'
+GROUP BY b.SalesId,b.CustomerId,b.CreatedBy,c.Name,u.username,b.CreatedDate,sts.Description,b.StatusId,b.CreatedDate,b.ProjectName,b.Comment,b.ShippingInfo,b.DropOffDate,b.Discount) as q
+##WHERE##
+ORDER BY ##ORDERBY##
+OFFSET ##SKIP## ROWS FETCH NEXT ##TAKE## ROWS only

@@ -1,0 +1,3 @@
+select u.UserId,u.FirstName,u.LastName,u.Username from FmCustomerUser cu
+right join FmUser u on cu.UserId = u.UserId
+where cu.CustomerUserId is null and u.type = 2

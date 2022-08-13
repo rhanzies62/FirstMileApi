@@ -1,0 +1,6 @@
+select b.SalesId,eq.EquipmentId,eq.Type as TypeId,eq.Name,eqt.Description as Type,eq.GatewayId,FORMAT(beq.BorrowedDateFrom, 'd', 'en-US' ) as BorrowedDateFrom,FORMAT(beq.BorrowedDateTo, 'd', 'en-US' ) as BorrowedDateTo,c.Name as CustomerName,b.ProjectName,b.Color from fmequipment eq
+join FmLookUpType eqt on eq.Type = eqt.LookUpValue and eqt.EntityCode = 'EQT'
+join FmBookEquipment beq on eq.EquipmentId = beq.EquipmentId
+join FmBooking b on b.SalesId = beq.SaleId
+join fmcustomer c on b.CustomerId = c.CustomerId
+where (eq.type = 1 or eq.type = 3) and (getdate() >= beq.BorrowedDateFrom and getdate() <= beq.BorrowedDateTo)

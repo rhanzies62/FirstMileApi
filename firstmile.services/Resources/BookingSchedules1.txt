@@ -1,0 +1,11 @@
+select 
+	be.SaleId as SalesId,
+	isnull(e.Name,act.Description) as Title,
+	be.BorrowedDateFrom as StartDate,
+	be.BorrowedDateTo as EndDate,
+	b.Color
+from fmbookequipment be
+join FmBooking b on be.SaleId  = b.SalesId
+join FmLookUpType ACT on be.ServiceTypeId = act.LookUpValue and act.EntityCode = 'ACT'
+left join FmEquipment e on be.EquipmentId = e.EquipmentId
+where b.CustomerId = ##customerId## and be.SaleId like '%##salesId##%'

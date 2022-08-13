@@ -1,0 +1,765 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ApiLog">
+          <Key>
+            <PropertyRef Name="LogID" />
+          </Key>
+          <Property Name="LogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IPAddress" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="RequestHeader" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="RequestContentType" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="RequestUri" Type="nchar" MaxLength="250" Nullable="false" />
+          <Property Name="RequestMethod" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="RequestTimestamp" Type="datetime" />
+          <Property Name="ResponseContentType" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ResponseStatusCode" Type="int" Nullable="false" />
+          <Property Name="ResponseTimestamp" Type="datetime" />
+          <Property Name="RequestBody" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FmBookEquipment">
+          <Key>
+            <PropertyRef Name="SaleEquipmentId" />
+          </Key>
+          <Property Name="SaleEquipmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SaleId" Type="int" Nullable="false" />
+          <Property Name="EquipmentId" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="BorrowedDateFrom" Type="datetime" Nullable="false" />
+          <Property Name="BorrowedDateTo" Type="datetime" Nullable="false" />
+          <Property Name="ServiceTypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FmBooking">
+          <Key>
+            <PropertyRef Name="SalesId" />
+          </Key>
+          <Property Name="SalesId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="ProjectName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Color" Type="nvarchar" MaxLength="10" />
+          <Property Name="StatusId" Type="int" Nullable="false" />
+          <Property Name="ServiceTypeId" Type="int" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar(max)" />
+          <Property Name="ShippingInfo" Type="nvarchar(max)" />
+          <Property Name="DropOffDate" Type="datetime" />
+          <Property Name="Discount" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="FmCustomer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="CountryId" Type="int" />
+          <Property Name="ProvinceId" Type="int" />
+          <Property Name="City" Type="nvarchar" MaxLength="20" />
+          <Property Name="PostalCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="Address" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="FmCustomerUser">
+          <Key>
+            <PropertyRef Name="CustomerUserId" />
+          </Key>
+          <Property Name="CustomerUserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FmEquipment">
+          <Key>
+            <PropertyRef Name="EquipmentId" />
+          </Key>
+          <Property Name="EquipmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Company" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="Serial" Type="nvarchar" MaxLength="20" />
+          <Property Name="GatewayId" Type="int" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FmLookUpType">
+          <Key>
+            <PropertyRef Name="LookUpTypeId" />
+          </Key>
+          <Property Name="LookUpTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EntityCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LookUpValue" Type="int" Nullable="false" />
+          <Property Name="Ordinal" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FmProvince">
+          <Key>
+            <PropertyRef Name="ProvinceId" />
+          </Key>
+          <Property Name="ProvinceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CountryId" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FmUsage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateFrom" Type="datetime" Nullable="false" />
+          <Property Name="DateTo" Type="datetime" Nullable="false" />
+          <Property Name="CellUsage" Type="float" Nullable="false" />
+          <Property Name="TotalUsage" Type="float" Nullable="false" />
+          <Property Name="OtherUsage" Type="float" Nullable="false" />
+          <Property Name="GatewayId" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FmUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Salt" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CountryId" Type="int" />
+          <Property Name="ProvinceId" Type="int" />
+          <Property Name="City" Type="nvarchar" MaxLength="20" />
+          <Property Name="PostalCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="ContactNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="PasswordRaw" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsPasswordChange" Type="bit" Nullable="false" />
+          <Property Name="FrameioToken" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Meili">
+          <Key>
+            <PropertyRef Name="MeiliId" />
+          </Key>
+          <Property Name="MeiliId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EquipmentId" Type="int" Nullable="false" />
+          <Property Name="SubscriptionId" Type="int" Nullable="false" />
+          <Property Name="CameraId" Type="int" Nullable="false" />
+          <Property Name="FileDestination" Type="int" Nullable="false" />
+          <Property Name="ProjectName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="EncoderId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_FmBooking_FmCustomer">
+          <End Role="FmCustomer" Type="Self.FmCustomer" Multiplicity="1" />
+          <End Role="FmBooking" Type="Self.FmBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FmCustomer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="FmBooking">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FmBookingEquipment_SaleId">
+          <End Role="FmBooking" Type="Self.FmBooking" Multiplicity="1" />
+          <End Role="FmBookEquipment" Type="Self.FmBookEquipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FmBooking">
+              <PropertyRef Name="SalesId" />
+            </Principal>
+            <Dependent Role="FmBookEquipment">
+              <PropertyRef Name="SaleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FmCustomer_FmProvince">
+          <End Role="FmProvince" Type="Self.FmProvince" Multiplicity="0..1" />
+          <End Role="FmCustomer" Type="Self.FmCustomer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FmProvince">
+              <PropertyRef Name="ProvinceId" />
+            </Principal>
+            <Dependent Role="FmCustomer">
+              <PropertyRef Name="ProvinceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FmCustomerUser_FmCustomer">
+          <End Role="FmCustomer" Type="Self.FmCustomer" Multiplicity="1" />
+          <End Role="FmCustomerUser" Type="Self.FmCustomerUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FmCustomer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="FmCustomerUser">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FmCustomerUser_FmUser">
+          <End Role="FmUser" Type="Self.FmUser" Multiplicity="1" />
+          <End Role="FmCustomerUser" Type="Self.FmCustomerUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FmUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="FmCustomerUser">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FmUser_FmProvince">
+          <End Role="FmProvince" Type="Self.FmProvince" Multiplicity="0..1" />
+          <End Role="FmUser" Type="Self.FmUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FmProvince">
+              <PropertyRef Name="ProvinceId" />
+            </Principal>
+            <Dependent Role="FmUser">
+              <PropertyRef Name="ProvinceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="ApiLog" EntityType="Self.ApiLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FmBookEquipment" EntityType="Self.FmBookEquipment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FmBooking" EntityType="Self.FmBooking" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FmCustomer" EntityType="Self.FmCustomer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FmCustomerUser" EntityType="Self.FmCustomerUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FmEquipment" EntityType="Self.FmEquipment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FmLookUpType" EntityType="Self.FmLookUpType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FmProvince" EntityType="Self.FmProvince" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FmUsage" EntityType="Self.FmUsage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FmUser" EntityType="Self.FmUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Meili" EntityType="Self.Meili" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_FmBooking_FmCustomer" Association="Self.FK_FmBooking_FmCustomer">
+            <End Role="FmCustomer" EntitySet="FmCustomer" />
+            <End Role="FmBooking" EntitySet="FmBooking" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FmBookingEquipment_SaleId" Association="Self.FK_FmBookingEquipment_SaleId">
+            <End Role="FmBooking" EntitySet="FmBooking" />
+            <End Role="FmBookEquipment" EntitySet="FmBookEquipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FmCustomer_FmProvince" Association="Self.FK_FmCustomer_FmProvince">
+            <End Role="FmProvince" EntitySet="FmProvince" />
+            <End Role="FmCustomer" EntitySet="FmCustomer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FmCustomerUser_FmCustomer" Association="Self.FK_FmCustomerUser_FmCustomer">
+            <End Role="FmCustomer" EntitySet="FmCustomer" />
+            <End Role="FmCustomerUser" EntitySet="FmCustomerUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FmCustomerUser_FmUser" Association="Self.FK_FmCustomerUser_FmUser">
+            <End Role="FmUser" EntitySet="FmUser" />
+            <End Role="FmCustomerUser" EntitySet="FmCustomerUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FmUser_FmProvince" Association="Self.FK_FmUser_FmProvince">
+            <End Role="FmProvince" EntitySet="FmProvince" />
+            <End Role="FmUser" EntitySet="FmUser" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="FmEquipment">
+          <Key>
+            <PropertyRef Name="EquipmentId" />
+          </Key>
+          <Property Name="EquipmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="Company" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="Serial" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="GatewayId" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FmUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Salt" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CountryId" Type="Int32" />
+          <Property Name="ProvinceId" Type="Int32" />
+          <Property Name="City" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PostalCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ContactNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="FmCustomerUsers" Relationship="Model.FK_FmCustomerUser_FmUser" FromRole="FmUser" ToRole="FmCustomerUser" />
+          <NavigationProperty Name="FmProvince" Relationship="Model.FK_FmUser_FmProvince" FromRole="FmUser" ToRole="FmProvince" />
+          <Property Name="PasswordRaw" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsPasswordChange" Type="Boolean" Nullable="false" />
+          <Property Name="FrameioToken" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="FirstMileEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="FmEquipments" EntityType="Self.FmEquipment" />
+          <EntitySet Name="FmUsers" EntityType="Self.FmUser" />
+          <EntitySet Name="FmLookUpTypes" EntityType="Model.FmLookUpType" />
+          <EntitySet Name="FmProvinces" EntityType="Model.FmProvince" />
+          <EntitySet Name="FmBookEquipments" EntityType="Model.FmBookEquipment" />
+          <EntitySet Name="FmBookings" EntityType="Model.FmBooking" />
+          <EntitySet Name="FmCustomers" EntityType="Model.FmCustomer" />
+          <EntitySet Name="FmCustomerUsers" EntityType="Model.FmCustomerUser" />
+          <AssociationSet Name="FK_FmBookingEquipment_SaleId" Association="Model.FK_FmBookingEquipment_SaleId">
+            <End Role="FmBooking" EntitySet="FmBookings" />
+            <End Role="FmBookEquipment" EntitySet="FmBookEquipments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FmBooking_FmCustomer" Association="Model.FK_FmBooking_FmCustomer">
+            <End Role="FmCustomer" EntitySet="FmCustomers" />
+            <End Role="FmBooking" EntitySet="FmBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FmCustomerUser_FmCustomer" Association="Model.FK_FmCustomerUser_FmCustomer">
+            <End Role="FmCustomer" EntitySet="FmCustomers" />
+            <End Role="FmCustomerUser" EntitySet="FmCustomerUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FmCustomerUser_FmUser" Association="Model.FK_FmCustomerUser_FmUser">
+            <End Role="FmUser" EntitySet="FmUsers" />
+            <End Role="FmCustomerUser" EntitySet="FmCustomerUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FmUser_FmProvince" Association="Model.FK_FmUser_FmProvince">
+            <End Role="FmProvince" EntitySet="FmProvinces" />
+            <End Role="FmUser" EntitySet="FmUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FmCustomer_FmProvince" Association="Model.FK_FmCustomer_FmProvince">
+            <End Role="FmProvince" EntitySet="FmProvinces" />
+            <End Role="FmCustomer" EntitySet="FmCustomers" />
+          </AssociationSet>
+          <EntitySet Name="ApiLogs" EntityType="Model.ApiLog" />
+          <EntitySet Name="FmUsages" EntityType="Model.FmUsage" />
+          <EntitySet Name="Meilis" EntityType="Model.Meili" />
+        </EntityContainer>
+        <EntityType Name="FmLookUpType">
+          <Key>
+            <PropertyRef Name="LookUpTypeId" />
+          </Key>
+          <Property Name="LookUpTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EntityCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LookUpValue" Type="Int32" Nullable="false" />
+          <Property Name="Ordinal" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FmProvince">
+          <Key>
+            <PropertyRef Name="ProvinceId" />
+          </Key>
+          <Property Name="ProvinceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CountryId" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="FmUsers" Relationship="Model.FK_FmUser_FmProvince" FromRole="FmProvince" ToRole="FmUser" />
+          <NavigationProperty Name="FmCustomers" Relationship="Model.FK_FmCustomer_FmProvince" FromRole="FmProvince" ToRole="FmCustomer" />
+        </EntityType>
+        <EntityType Name="FmBookEquipment">
+          <Key>
+            <PropertyRef Name="SaleEquipmentId" />
+          </Key>
+          <Property Name="SaleEquipmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SaleId" Type="Int32" Nullable="false" />
+          <Property Name="EquipmentId" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="BorrowedDateFrom" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="BorrowedDateTo" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="FmBooking" Relationship="Model.FK_FmBookingEquipment_SaleId" FromRole="FmBookEquipment" ToRole="FmBooking" />
+          <Property Name="ServiceTypeId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FmBooking">
+          <Key>
+            <PropertyRef Name="SalesId" />
+          </Key>
+          <Property Name="SalesId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="FmBookEquipments" Relationship="Model.FK_FmBookingEquipment_SaleId" FromRole="FmBooking" ToRole="FmBookEquipment" />
+          <NavigationProperty Name="FmCustomer" Relationship="Model.FK_FmBooking_FmCustomer" FromRole="FmBooking" ToRole="FmCustomer" />
+          <Property Name="ProjectName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Color" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="StatusId" Type="Int32" Nullable="false" />
+          <Property Name="ServiceTypeId" Type="Int32" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ShippingInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DropOffDate" Type="DateTime" Precision="3" />
+          <Property Name="Discount" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="FmCustomer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="FmBookings" Relationship="Model.FK_FmBooking_FmCustomer" FromRole="FmCustomer" ToRole="FmBooking" />
+          <NavigationProperty Name="FmCustomerUsers" Relationship="Model.FK_FmCustomerUser_FmCustomer" FromRole="FmCustomer" ToRole="FmCustomerUser" />
+          <Property Name="CountryId" Type="Int32" />
+          <Property Name="ProvinceId" Type="Int32" />
+          <Property Name="City" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PostalCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="FmProvince" Relationship="Model.FK_FmCustomer_FmProvince" FromRole="FmCustomer" ToRole="FmProvince" />
+          <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="FmCustomerUser">
+          <Key>
+            <PropertyRef Name="CustomerUserId" />
+          </Key>
+          <Property Name="CustomerUserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="FmCustomer" Relationship="Model.FK_FmCustomerUser_FmCustomer" FromRole="FmCustomerUser" ToRole="FmCustomer" />
+          <NavigationProperty Name="FmUser" Relationship="Model.FK_FmCustomerUser_FmUser" FromRole="FmCustomerUser" ToRole="FmUser" />
+        </EntityType>
+        <Association Name="FK_FmBookingEquipment_SaleId">
+          <End Type="Model.FmBooking" Role="FmBooking" Multiplicity="1" />
+          <End Type="Model.FmBookEquipment" Role="FmBookEquipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FmBooking">
+              <PropertyRef Name="SalesId" />
+            </Principal>
+            <Dependent Role="FmBookEquipment">
+              <PropertyRef Name="SaleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FmBooking_FmCustomer">
+          <End Type="Model.FmCustomer" Role="FmCustomer" Multiplicity="1" />
+          <End Type="Model.FmBooking" Role="FmBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FmCustomer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="FmBooking">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FmCustomerUser_FmCustomer">
+          <End Type="Model.FmCustomer" Role="FmCustomer" Multiplicity="1" />
+          <End Type="Model.FmCustomerUser" Role="FmCustomerUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FmCustomer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="FmCustomerUser">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FmCustomerUser_FmUser">
+          <End Type="Model.FmUser" Role="FmUser" Multiplicity="1" />
+          <End Type="Model.FmCustomerUser" Role="FmCustomerUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FmUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="FmCustomerUser">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FmUser_FmProvince">
+          <End Type="Model.FmProvince" Role="FmProvince" Multiplicity="0..1" />
+          <End Type="Model.FmUser" Role="FmUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FmProvince">
+              <PropertyRef Name="ProvinceId" />
+            </Principal>
+            <Dependent Role="FmUser">
+              <PropertyRef Name="ProvinceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FmCustomer_FmProvince">
+          <End Type="Model.FmProvince" Role="FmProvince" Multiplicity="0..1" />
+          <End Type="Model.FmCustomer" Role="FmCustomer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FmProvince">
+              <PropertyRef Name="ProvinceId" />
+            </Principal>
+            <Dependent Role="FmCustomer">
+              <PropertyRef Name="ProvinceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ApiLog">
+          <Key>
+            <PropertyRef Name="LogID" />
+          </Key>
+          <Property Name="LogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IPAddress" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="RequestHeader" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RequestContentType" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="RequestUri" Type="String" Nullable="false" MaxLength="250" FixedLength="true" Unicode="true" />
+          <Property Name="RequestMethod" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="RequestTimestamp" Type="DateTime" Precision="3" />
+          <Property Name="ResponseContentType" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ResponseStatusCode" Type="Int32" Nullable="false" />
+          <Property Name="ResponseTimestamp" Type="DateTime" Precision="3" />
+          <Property Name="RequestBody" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="FmUsage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateFrom" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateTo" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CellUsage" Type="Double" Nullable="false" />
+          <Property Name="TotalUsage" Type="Double" Nullable="false" />
+          <Property Name="OtherUsage" Type="Double" Nullable="false" />
+          <Property Name="GatewayId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Meili">
+          <Key>
+            <PropertyRef Name="MeiliId" />
+          </Key>
+          <Property Name="MeiliId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EquipmentId" Type="Int32" Nullable="false" />
+          <Property Name="SubscriptionId" Type="Int32" Nullable="false" />
+          <Property Name="CameraId" Type="Int32" Nullable="false" />
+          <Property Name="FileDestination" Type="Int32" Nullable="false" />
+          <Property Name="ProjectName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="EncoderId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="FirstMileEntities">
+          <EntitySetMapping Name="FmEquipments">
+            <EntityTypeMapping TypeName="Model.FmEquipment">
+              <MappingFragment StoreEntitySet="FmEquipment">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="GatewayId" ColumnName="GatewayId" />
+                <ScalarProperty Name="Serial" ColumnName="Serial" />
+                <ScalarProperty Name="EquipmentId" ColumnName="EquipmentId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FmUsers">
+            <EntityTypeMapping TypeName="Model.FmUser">
+              <MappingFragment StoreEntitySet="FmUser">
+                <ScalarProperty Name="FrameioToken" ColumnName="FrameioToken" />
+                <ScalarProperty Name="IsPasswordChange" ColumnName="IsPasswordChange" />
+                <ScalarProperty Name="PasswordRaw" ColumnName="PasswordRaw" />
+                <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="ProvinceId" ColumnName="ProvinceId" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="Salt" ColumnName="Salt" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FmLookUpTypes">
+            <EntityTypeMapping TypeName="Model.FmLookUpType">
+              <MappingFragment StoreEntitySet="FmLookUpType">
+                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+                <ScalarProperty Name="LookUpValue" ColumnName="LookUpValue" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="EntityCode" ColumnName="EntityCode" />
+                <ScalarProperty Name="LookUpTypeId" ColumnName="LookUpTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FmProvinces">
+            <EntityTypeMapping TypeName="Model.FmProvince">
+              <MappingFragment StoreEntitySet="FmProvince">
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="ProvinceId" ColumnName="ProvinceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FmBookEquipments">
+            <EntityTypeMapping TypeName="Model.FmBookEquipment">
+              <MappingFragment StoreEntitySet="FmBookEquipment">
+                <ScalarProperty Name="ServiceTypeId" ColumnName="ServiceTypeId" />
+                <ScalarProperty Name="BorrowedDateTo" ColumnName="BorrowedDateTo" />
+                <ScalarProperty Name="BorrowedDateFrom" ColumnName="BorrowedDateFrom" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="EquipmentId" ColumnName="EquipmentId" />
+                <ScalarProperty Name="SaleId" ColumnName="SaleId" />
+                <ScalarProperty Name="SaleEquipmentId" ColumnName="SaleEquipmentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FmBookings">
+            <EntityTypeMapping TypeName="Model.FmBooking">
+              <MappingFragment StoreEntitySet="FmBooking">
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="DropOffDate" ColumnName="DropOffDate" />
+                <ScalarProperty Name="ShippingInfo" ColumnName="ShippingInfo" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="ServiceTypeId" ColumnName="ServiceTypeId" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="SalesId" ColumnName="SalesId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FmCustomers">
+            <EntityTypeMapping TypeName="Model.FmCustomer">
+              <MappingFragment StoreEntitySet="FmCustomer">
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="ProvinceId" ColumnName="ProvinceId" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FmCustomerUsers">
+            <EntityTypeMapping TypeName="Model.FmCustomerUser">
+              <MappingFragment StoreEntitySet="FmCustomerUser">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="CustomerUserId" ColumnName="CustomerUserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ApiLogs">
+            <EntityTypeMapping TypeName="Model.ApiLog">
+              <MappingFragment StoreEntitySet="ApiLog">
+                <ScalarProperty Name="RequestBody" ColumnName="RequestBody" />
+                <ScalarProperty Name="ResponseTimestamp" ColumnName="ResponseTimestamp" />
+                <ScalarProperty Name="ResponseStatusCode" ColumnName="ResponseStatusCode" />
+                <ScalarProperty Name="ResponseContentType" ColumnName="ResponseContentType" />
+                <ScalarProperty Name="RequestTimestamp" ColumnName="RequestTimestamp" />
+                <ScalarProperty Name="RequestMethod" ColumnName="RequestMethod" />
+                <ScalarProperty Name="RequestUri" ColumnName="RequestUri" />
+                <ScalarProperty Name="RequestContentType" ColumnName="RequestContentType" />
+                <ScalarProperty Name="RequestHeader" ColumnName="RequestHeader" />
+                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+                <ScalarProperty Name="LogID" ColumnName="LogID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FmUsages">
+            <EntityTypeMapping TypeName="Model.FmUsage">
+              <MappingFragment StoreEntitySet="FmUsage">
+                <ScalarProperty Name="GatewayId" ColumnName="GatewayId" />
+                <ScalarProperty Name="OtherUsage" ColumnName="OtherUsage" />
+                <ScalarProperty Name="TotalUsage" ColumnName="TotalUsage" />
+                <ScalarProperty Name="CellUsage" ColumnName="CellUsage" />
+                <ScalarProperty Name="DateTo" ColumnName="DateTo" />
+                <ScalarProperty Name="DateFrom" ColumnName="DateFrom" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Meilis">
+            <EntityTypeMapping TypeName="Model.Meili">
+              <MappingFragment StoreEntitySet="Meili">
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="EncoderId" ColumnName="EncoderId" />
+                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+                <ScalarProperty Name="FileDestination" ColumnName="FileDestination" />
+                <ScalarProperty Name="CameraId" ColumnName="CameraId" />
+                <ScalarProperty Name="SubscriptionId" ColumnName="SubscriptionId" />
+                <ScalarProperty Name="EquipmentId" ColumnName="EquipmentId" />
+                <ScalarProperty Name="MeiliId" ColumnName="MeiliId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

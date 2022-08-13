@@ -1,0 +1,3 @@
+select GatewayId, cast(sum(cellusage) as int) CellUsage, cast(sum(otherusage) as int) OtherUsage, cast(sum(totalusage) as int) TotalUsage from fmusage
+where GatewayId = ##Gateway## and DateFrom >= '##from##' and dateto <= '##to##'
+group by gatewayid

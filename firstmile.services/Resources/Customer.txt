@@ -1,0 +1,25 @@
+SELECT   Count(customerid) as TotalCount
+FROM     FmCustomer
+##WHERE##
+
+SELECT   c.CustomerId, 
+         c.Name, 
+         c.Phone, 
+         c.Email, 
+         u.username as CreatedBy, 
+         c.CreatedDate,
+         FORMAT(c.CreatedDate, 'd', 'en-US' ) as CreatedDateString,
+         c.Address,
+         c.City,
+         c.CountryId,
+         c.PostalCode,
+         c.ProvinceId,
+		 cnt.Description as Country,
+		 p.Description as Province
+FROM     fmcustomer c
+JOIN fmuser u on c.CreatedBy = u.UserId
+left join FmLookUpType cnt on c.CountryId = cnt.LookUpValue and cnt.EntityCode = 'CNT'
+left join FmProvince p on c.ProvinceId = p.ProvinceId
+##WHERE##
+ORDER BY ##ORDERBY##
+OFFSET ##SKIP## ROWS FETCH NEXT ##TAKE## ROWS only

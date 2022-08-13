@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C16F3098-18FD-4D38-B259-08837B637095}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>firstmile.domain</RootNamespace>
+    <AssemblyName>firstmile.domain</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApiLog.cs">
+      <DependentUpon>FirstMileModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BaseEntity.cs" />
+    <Compile Include="Common\Enum.cs" />
+    <Compile Include="Common\SiteConstant.cs" />
+    <Compile Include="FirstMileModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FirstMileModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FirstMileModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FirstMileModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FirstMileModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FirstMileModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="FmBookEquipment.cs">
+      <DependentUpon>FirstMileModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FmBooking.cs">
+      <DependentUpon>FirstMileModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FmCustomer.cs">
+      <DependentUpon>FirstMileModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FmCustomerUser.cs">
+      <DependentUpon>FirstMileModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FmEquipment.cs">
+      <DependentUpon>FirstMileModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FmLookUpType.cs">
+      <DependentUpon>FirstMileModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FmProvince.cs">
+      <DependentUpon>FirstMileModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FmUsage.cs">
+      <DependentUpon>FirstMileModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FmUser.cs">
+      <DependentUpon>FirstMileModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Meili.cs">
+      <DependentUpon>FirstMileModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ApiLogModel.cs" />
+    <Compile Include="Model\BookEquipmentModel.cs" />
+    <Compile Include="Model\BookingModel.cs" />
+    <Compile Include="Model\CustomerModel.cs" />
+    <Compile Include="Model\CustomerUserModel.cs" />
+    <Compile Include="Model\EquipmentGridModel.cs" />
+    <Compile Include="Model\EquipmentModel.cs" />
+    <Compile Include="Model\Gateway.cs" />
+    <Compile Include="Model\LoginModel.cs" />
+    <Compile Include="Model\LookUpModel.cs" />
+    <Compile Include="Model\MeiliModel.cs" />
+    <Compile Include="Model\UsageModel.cs" />
+    <Compile Include="Model\UserModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IGenericRepository.cs" />
+    <Compile Include="Services\IRepositoryQuery.cs" />
+    <Compile Include="Services\IUnitOfWork.cs" />
+    <Compile Include="Utilities\EntityErrorField.cs" />
+    <Compile Include="Utilities\GridFilters.cs" />
+    <Compile Include="Utilities\GridResult.cs" />
+    <Compile Include="Utilities\GridSort.cs" />
+    <Compile Include="Utilities\Response.cs" />
+    <Compile Include="Utilities\Utility.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="FirstMileModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>FirstMileModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="FirstMileModel.edmx.diagram">
+      <DependentUpon>FirstMileModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="FirstMileModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>FirstMileModel.Context.cs</LastGenOutput>
+      <DependentUpon>FirstMileModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="FirstMileModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>FirstMileModel.edmx</DependentUpon>
+      <LastGenOutput>FirstMileModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

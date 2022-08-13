@@ -1,0 +1,13 @@
+select count(saleequipmentid) as TotalCount from FmBookEquipment
+where SaleId = ##SalesID##
+
+select * from 
+(select be.SaleEquipmentId,be.EquipmentId,e.Name,e.Serial,e.Description,eqt.Description as Type,FORMAT ( be.BorrowedDateFrom, 'd', 'en-US' ) as BorrowedDateFromST, FORMAT ( be.BorrowedDateTo, 'd', 'en-US' ) as BorrowedDateToST,be.BorrowedDateFrom,be.BorrowedDateTo,be.CreatedDate,u.Username,act.Description as ServiceType, be.ServiceTypeId from FmBookEquipment be
+join FMLookUpType act on be.ServiceTypeId = act.LookUpValue and act.EntityCode = 'ACT'
+left join FmEquipment e on be.EquipmentId = e.EquipmentId
+join fmuser u on be.CreatedBy = u.UserId
+left join FmLookUpType eqt on e.Type = eqt.LookUpValue and eqt.EntityCode = 'EQT'
+where be.SaleId = ##SalesID##) as q
+##WHERE##
+ORDER BY ##ORDERBY##
+OFFSET ##SKIP## ROWS FETCH NEXT ##TAKE## ROWS only
