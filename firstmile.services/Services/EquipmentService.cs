@@ -187,10 +187,10 @@ namespace firstmile.services.Services
                 }
                 if (e.TypeId == 1)
                 {
-                    var usage = await this.GetSourceUsage(e.GatewayId.Value, from, to);
-                    e.TotalUsage = usage.TotalUsage;
-                    e.TotalCellUsage = usage.TotalCellUsage;
-                    e.OtherUsage = usage.TotalCellUsage - usage.TotalCellUsage;
+                    //var usage = await this.GetSourceUsage(e.GatewayId.Value, from, to);
+                    //e.TotalUsage = usage.TotalUsage;
+                    //e.TotalCellUsage = usage.TotalCellUsage;
+                    //e.OtherUsage = usage.TotalCellUsage - usage.TotalCellUsage;
                 }
 
 
@@ -225,27 +225,30 @@ namespace firstmile.services.Services
             }
             else
             {
-                var range = 44;
-                var diff = to - from;
-                var loops = diff.Days / range;
-                if (diff.Days > range)
-                {
-                    for (int i = 0; i <= loops - 1; i++)
-                    {
-                        var usage = await gatewayAPI.GetGatewayUsage(gatewayId, from.AddDays(range * i), from.AddDays(range * (i + 1)));
-                        totalUsage.TotalUsage += usage.TotalUsage;
-                        totalUsage.CellUsage += usage.CellUsage;
-                    }
-                    var _usage = await gatewayAPI.GetGatewayUsage(gatewayId, from.AddDays(range * loops), to);
-                    totalUsage.TotalUsage += _usage.TotalUsage;
-                    totalUsage.CellUsage += _usage.CellUsage;
-                }
-                else
-                {
-                    var usage = await gatewayAPI.GetGatewayUsage(gatewayId, from, to);
-                    totalUsage.TotalUsage += usage.TotalUsage;
-                    totalUsage.CellUsage += usage.CellUsage;
-                }
+                totalUsage = new GatewayUsage();
+                totalUsage.StartTime = from;
+                totalUsage.FinishTime = to;
+                //var range = 44;
+                //var diff = to - from;
+                //var loops = diff.Days / range;
+                //if (diff.Days > range)
+                //{
+                //    for (int i = 0; i <= loops - 1; i++)
+                //    {
+                //        var usage = await gatewayAPI.GetGatewayUsage(gatewayId, from.AddDays(range * i), from.AddDays(range * (i + 1)));
+                //        totalUsage.TotalUsage += usage.TotalUsage;
+                //        totalUsage.CellUsage += usage.CellUsage;
+                //    }
+                //    var _usage = await gatewayAPI.GetGatewayUsage(gatewayId, from.AddDays(range * loops), to);
+                //    totalUsage.TotalUsage += _usage.TotalUsage;
+                //    totalUsage.CellUsage += _usage.CellUsage;
+                //}
+                //else
+                //{
+                //    var usage = await gatewayAPI.GetGatewayUsage(gatewayId, from, to);
+                //    totalUsage.TotalUsage += usage.TotalUsage;
+                //    totalUsage.CellUsage += usage.CellUsage;
+                //}
             }
             return totalUsage;
         }

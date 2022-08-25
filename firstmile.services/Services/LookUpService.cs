@@ -43,7 +43,7 @@ namespace firstmile.services.Services
             {
                 Description = i.Name,
                 Id = i.CustomerId
-            });
+            }).OrderBy(i => i.Description);
         }
 
         public IEnumerable<LookUpModel> ListAvailableEquipment()

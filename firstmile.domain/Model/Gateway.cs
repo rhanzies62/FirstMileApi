@@ -50,7 +50,8 @@ namespace firstmile.domain.Model
     {
         public GatewayUsage()
         {
-
+            TotalUsage = 0;
+            CellUsage = 0;
         }
         public GatewayUsage(bool isError)
         {

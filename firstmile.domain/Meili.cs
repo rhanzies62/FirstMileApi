@@ -24,5 +24,6 @@ namespace firstmile.domain
         public int UserId { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public System.DateTime UpdatedDate { get; set; }
+        public int StatusId { get; set; }
     }
 }

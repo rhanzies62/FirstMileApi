@@ -20,5 +20,6 @@ namespace firstmile.services.Interface
         Response AddEditMeili(MeiliModel model);
         GridResultGeneric<MeiliModel> ListUserMeilie(GridFilter filter, int userId);
         GridResultGeneric<MeiliModel> ListAllMeilie(GridFilter filter);
+        MeiliModel GetMeili(int id);
     }
 }

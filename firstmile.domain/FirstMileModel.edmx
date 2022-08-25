@@ -165,6 +165,7 @@
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+          <Property Name="StatusId" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_FmBooking_FmCustomer">
           <End Role="FmCustomer" Type="Self.FmCustomer" Multiplicity="1" />
@@ -560,6 +561,7 @@
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="StatusId" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -726,6 +728,7 @@
           <EntitySetMapping Name="Meilis">
             <EntityTypeMapping TypeName="Model.Meili">
               <MappingFragment StoreEntitySet="Meili">
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
                 <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />

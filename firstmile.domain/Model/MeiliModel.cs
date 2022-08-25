@@ -21,5 +21,6 @@ namespace firstmile.domain.Model
         public string CreatedDateString {  get { return CreatedDate.ToShortDateString(); } }
         public DateTime UpdatedDate { get; set; }
         public string UpdatedDateString { get { return UpdatedDate.ToShortDateString(); } }
+        public int StatusId { get; set; }
     }
 }

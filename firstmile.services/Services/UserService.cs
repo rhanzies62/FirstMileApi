@@ -187,13 +187,18 @@ namespace firstmile.services.Services
             {
                 var db = _unitOfWork.Repository<FmUser>().GetDbContext();
                 Meili entity;
-                if(model.MeiliId > 0) {
+                if (model.MeiliId > 0)
+                {
                     entity = db.Meilis.FirstOrDefault(i => i.MeiliId == model.MeiliId);
-                } else {
-                    entity = new Meili() {
-                         CreatedDate = DateTime.UtcNow,
-                         UserId = model.UserId
+                }
+                else
+                {
+                    entity = new Meili()
+                    {
+                        CreatedDate = DateTime.UtcNow,
+                        UserId = model.UserId
                     };
+                    entity.StatusId = 1;
                     db.Meilis.Add(entity);
                 }
                 entity.UpdatedDate = DateTime.UtcNow;
@@ -213,7 +218,24 @@ namespace firstmile.services.Services
             return response;
         }
 
-        public GridResultGeneric<MeiliModel> ListUserMeilie(GridFilter filter,int userId)
+        public MeiliModel GetMeili(int id)
+        {
+            var db = _unitOfWork.Repository<FmUser>().GetDbContext();
+            return db.Meilis.Where(m => m.MeiliId == id).Select(m => new MeiliModel
+            {
+                EncoderId = m.MeiliId,
+                CreatedDate = m.CreatedDate,
+                CameraId = m.MeiliId,
+                EquipmentId = m.MeiliId,
+                FileDestination = m.FileDestination,
+                MeiliId = m.MeiliId,
+                ProjectName = m.ProjectName,
+                StatusId = m.StatusId,
+                UserId = m.UserId,
+            }).FirstOrDefault();
+        }
+
+        public GridResultGeneric<MeiliModel> ListUserMeilie(GridFilter filter, int userId)
         {
             var result = new GridResultGeneric<MeiliModel>();
             var db = _unitOfWork.Repository<FmCustomer>().GetDbContext();

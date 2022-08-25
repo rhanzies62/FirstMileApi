@@ -68,5 +68,11 @@ namespace firstmile.api.Controllers
         {
             return Request.CreateResponse<GridResultGeneric<MeiliModel>>(HttpStatusCode.OK, _userService.ListAllMeilie(filter));
         }
+
+        [HttpGet, Route("Api/GetMeili")]
+        public HttpResponseMessage GetMeili(int id)
+        {
+            return Request.CreateResponse(HttpStatusCode.OK, _userService.GetMeili(id));
+        }
     }
 }
